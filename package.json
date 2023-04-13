@@ -8,7 +8,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "start": "NODE_ENV=production node src/app.js"
+    "start": "NODE_ENV=production node src/app.js",
+    "stack:up": "docker-compose up -d",
+    "stack:down": "docker-compose down",
+    "stack:start": "docker-compose start",
+    "stack:stop": "docker-compose stop"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
