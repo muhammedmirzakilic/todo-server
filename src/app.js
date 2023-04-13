@@ -8,9 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const db = require('./db');
+const repository = require('./repository');
 
-db.sequelize
+repository.sequelize
   .sync()
   .then(() => {
     console.log('Synced db.');
