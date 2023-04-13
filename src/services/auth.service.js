@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const repository = require('../repository');
 const User = repository.users;
 const {
   errors: { CustomError, ...errors },
 } = require('../constants');
 const config = require('../config');
+
 async function signup(name, email, password) {
   const check = await User.findOne({
     where: {
@@ -23,14 +23,14 @@ async function signup(name, email, password) {
     password: hash,
     email,
   });
-  const token = jwt.sign({ id: user._id }, config.jwtSecret, {
+  const token = jwt.sign({ id: user.id }, config.jwtSecret, {
     expiresIn: config.jwtMaxAge,
   });
   return token;
 }
 
 async function login(email, password) {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ where: { email } });
   if (!user) {
     throw new CustomError(errors.userNotFound);
   }
@@ -40,7 +40,7 @@ async function login(email, password) {
     throw new CustomError(errors.userNotFound);
   }
 
-  const token = jwt.sign({ id: user._id }, config.jwtSecret, {
+  const token = jwt.sign({ id: user.id }, config.jwtSecret, {
     expiresIn: config.jwtMaxAge,
   });
   return token;
