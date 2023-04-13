@@ -28,8 +28,13 @@ const deleteTodo = async (userId, id) => {
   await todo.destroy();
 };
 
+const listTodos = async userId => {
+  return Todo.findAll({ where: { userId } });
+};
+
 module.exports = {
   createTodo,
   toggleTodo,
   deleteTodo,
+  listTodos,
 };

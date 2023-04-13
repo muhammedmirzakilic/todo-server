@@ -54,4 +54,9 @@ router.delete('/:id', verifyToken, validate(deleteTodoValidator.validate), async
   res.sendStatus(200);
 });
 
+router.get('/list', verifyToken, async (req, res, next) => {
+  const todos = await todoService.listTodos(req.userId);
+  res.json({ todos });
+});
+
 module.exports = router;
