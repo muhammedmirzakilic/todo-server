@@ -13,4 +13,6 @@ const repository = {};
 repository.Sequelize = Sequelize;
 repository.sequelize = sequelize;
 
+repository.users = require('./models/user.model')(sequelize, Sequelize);
+
 module.exports = repository;
