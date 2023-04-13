@@ -17,4 +17,8 @@ module.exports = {
     code: 2001,
     description: 'Email already exist',
   },
+  userNotFound: {
+    code: 2002,
+    description: 'User not found',
+  },
 };

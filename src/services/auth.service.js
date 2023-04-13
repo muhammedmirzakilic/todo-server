@@ -29,6 +29,23 @@ async function signup(name, email, password) {
   return token;
 }
 
+async function login(email, password) {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new CustomError(errors.userNotFound);
+  }
+
+  const isMatched = await isPasswordCorrect(password, user.password);
+  if (!isMatched) {
+    throw new CustomError(errors.userNotFound);
+  }
+
+  const token = jwt.sign({ id: user._id }, config.jwtSecret, {
+    expiresIn: config.jwtMaxAge,
+  });
+  return token;
+}
+
 async function hashPassword(password) {
   return new Promise(resolve => {
     bcrypt.hash(password, 10).then(hash => {
@@ -37,6 +54,13 @@ async function hashPassword(password) {
   });
 }
 
+async function isPasswordCorrect(password, hash) {
+  return new Promise(resolve => {
+    bcrypt.compare(password, hash).then(result => resolve(result));
+  });
+}
+
 module.exports = {
   signup,
+  login,
 };
