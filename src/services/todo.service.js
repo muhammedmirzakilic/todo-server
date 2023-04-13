@@ -20,7 +20,16 @@ const toggleTodo = async (userId, id, isCompleted) => {
   return todo.save();
 };
 
+const deleteTodo = async (userId, id) => {
+  const todo = await Todo.findByPk(id);
+  if (!todo || todo.userId !== userId) {
+    throw new CustomError(errors.todoNotFound);
+  }
+  await todo.destroy();
+};
+
 module.exports = {
   createTodo,
   toggleTodo,
+  deleteTodo,
 };

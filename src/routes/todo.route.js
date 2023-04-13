@@ -4,12 +4,17 @@ const { todoService } = require('../services');
 const {
   validators: {
     validate,
-    todoValidators: { createTodoValidator, markTodoCompletedValidator, markTodoUncompletedValidator },
+    todoValidators: {
+      createTodoValidator,
+      markTodoCompletedValidator,
+      markTodoUncompletedValidator,
+      deleteTodoValidator,
+    },
   },
   verifyToken,
 } = require('../middlewares');
 
-router.post('/create', verifyToken, validate(createTodoValidator.validate), async (req, res, next) => {
+router.put('/', verifyToken, validate(createTodoValidator.validate), async (req, res, next) => {
   const { title } = req.body;
   const todo = await todoService.createTodo(req.userId, title);
   res.status(201).json({
@@ -24,7 +29,7 @@ router.post(
   async (req, res, next) => {
     const { id } = req.params;
     const todo = await todoService.toggleTodo(req.userId, id, true);
-    res.status(201).json({
+    res.status(200).json({
       todo,
     });
   },
@@ -37,10 +42,16 @@ router.post(
   async (req, res, next) => {
     const { id } = req.params;
     const todo = await todoService.toggleTodo(req.userId, id, false);
-    res.status(201).json({
+    res.status(200).json({
       todo,
     });
   },
 );
+
+router.delete('/:id', verifyToken, validate(deleteTodoValidator.validate), async (req, res, next) => {
+  const { id } = req.params;
+  await todoService.deleteTodo(req.userId, id);
+  res.sendStatus(200);
+});
 
 module.exports = router;
