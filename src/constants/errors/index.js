@@ -13,6 +13,10 @@ module.exports = {
     code: 1002,
     description: "'password' field is invalid",
   },
+  idIsInvalid: {
+    code: 1003,
+    description: "'id' field is invalid",
+  },
   emailAlreadyExists: {
     code: 2001,
     description: 'Email already exist',
@@ -24,5 +28,9 @@ module.exports = {
   titleIsInvalid: {
     code: 3001,
     description: "'title' field is invalid",
+  },
+  todoNotFound: {
+    code: 3002,
+    description: 'Todo not found',
   },
 };
