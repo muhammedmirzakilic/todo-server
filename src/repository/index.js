@@ -14,5 +14,6 @@ repository.Sequelize = Sequelize;
 repository.sequelize = sequelize;
 
 repository.users = require('./models/user.model')(sequelize, Sequelize);
+repository.todos = require('./models/todo.model')(sequelize, Sequelize);
 
 module.exports = repository;
