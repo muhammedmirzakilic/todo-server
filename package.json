@@ -1,0 +1,25 @@
+{
+  "name": "todo-server",
+  "version": "1.0.0",
+  "description": "Todo Server",
+  "main": "src/app.js",
+  "repository": "https://github.com/muhammedmirzakilic/todo-server.git",
+  "author": "Muhammed Mirza Kilic <muhammedmirzakilic@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "NODE_ENV=production node src/app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.15.0",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.31.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
