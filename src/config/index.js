@@ -13,4 +13,6 @@ module.exports = {
       idle: 10000,
     },
   },
+  jwtSecret: process.env.JWT_SECRET || '!v3Ry_S3cR3T*',
+  jwtMaxAge: process.env.JWT_MAX_AGE || 24 * 60 * 60,
 };

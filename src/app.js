@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const routes = require('./routes');
 const config = require('./config');
 const PORT = config.port;
 const app = express();
@@ -19,6 +20,7 @@ repository.sequelize
     console.log('Failed to sync db: ' + err.message);
   });
 
+app.use('/auth', routes.authRoutes);
 app.get('/', (req, res) => {
   res.send({ status: 'working!' });
 });
