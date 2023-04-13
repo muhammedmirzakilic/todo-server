@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 const authValidators = require('./auth');
-
+const todoValidators = require('./todo');
 const validate = validations => {
   return async (req, res, next) => {
     await Promise.all(validations.map(validation => validation.run(req)));
@@ -17,4 +17,5 @@ const validate = validations => {
 module.exports = {
   validate,
   authValidators,
+  todoValidators,
 };

@@ -21,4 +21,8 @@ module.exports = {
     code: 2002,
     description: 'User not found',
   },
+  titleIsInvalid: {
+    code: 3001,
+    description: "'title' field is invalid",
+  },
 };

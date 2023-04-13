@@ -21,6 +21,7 @@ repository.sequelize
   });
 
 app.use('/auth', routes.authRoutes);
+app.use('/todo', routes.todoRoutes);
 app.get('/', (req, res) => {
   res.send({ status: 'working!' });
 });
