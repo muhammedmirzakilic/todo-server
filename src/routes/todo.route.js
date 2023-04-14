@@ -28,10 +28,14 @@ router.post(
   validate(markTodoCompletedValidator.validate),
   async (req, res, next) => {
     const { id } = req.params;
-    const todo = await todoService.toggleTodo(req.userId, id, true);
-    res.status(200).json({
-      todo,
-    });
+    try {
+      const todo = await todoService.toggleTodo(req.userId, id, true);
+      res.status(200).json({
+        todo,
+      });
+    } catch (error) {
+      next(error);
+    }
   },
 );
 
@@ -41,17 +45,25 @@ router.post(
   validate(markTodoUncompletedValidator.validate),
   async (req, res, next) => {
     const { id } = req.params;
-    const todo = await todoService.toggleTodo(req.userId, id, false);
-    res.status(200).json({
-      todo,
-    });
+    try {
+      const todo = await todoService.toggleTodo(req.userId, id, false);
+      res.status(200).json({
+        todo,
+      });
+    } catch (error) {
+      next(error);
+    }
   },
 );
 
 router.delete('/:id', verifyToken, validate(deleteTodoValidator.validate), async (req, res, next) => {
   const { id } = req.params;
-  await todoService.deleteTodo(req.userId, id);
-  res.sendStatus(200);
+  try {
+    await todoService.deleteTodo(req.userId, id);
+    res.sendStatus(200);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get('/list', verifyToken, async (req, res, next) => {

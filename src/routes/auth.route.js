@@ -11,24 +11,26 @@ const config = require('../config');
 
 router.post('/signup', validate(signupValidator.validate), async (req, res, next) => {
   const { name, email, password } = req.body;
-  const token = await authService.signup(name, email, password);
-  res.cookie('jwt', token, {
-    httpOnly: true,
-    maxAge: config.jwtMaxAge * 1000,
-  });
-  res.status(201).send();
+  try {
+    const token = await authService.signup(name, email, password);
+    res.status(201).json({
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post('/login', validate(loginValidator.validate), async (req, res, next) => {
   const { email, password } = req.body;
-  const token = await authService.login(email, password);
-  res.cookie('jwt', token, {
-    httpOnly: true,
-    maxAge: config.jwtMaxAge * 1000,
-  });
-  res.status(201).json({
-    token,
-  });
+  try {
+    const token = await authService.login(email, password);
+    res.status(200).json({
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

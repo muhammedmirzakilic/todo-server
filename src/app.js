@@ -33,6 +33,14 @@ app.get('/', (req, res) => {
   res.send({ status: 'working!' });
 });
 
+app.use((error, req, res, next) => {
+  const message = error.message || 'An unexpected error occurred!';
+  return res.json({
+    code: error.code,
+    message,
+  });
+});
+
 app.listen(PORT, function () {
   console.log('Server started');
 });
