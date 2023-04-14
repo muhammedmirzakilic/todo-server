@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const routes = require('./routes');
 const config = require('./config');
+
 const PORT = config.port;
 const app = express();
 app.use(express.json());
@@ -19,6 +21,11 @@ repository.sequelize
   .catch(err => {
     console.log('Failed to sync db: ' + err.message);
   });
+var corsOptions = {
+  origin: '*',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use('/auth', routes.authRoutes);
 app.use('/todo', routes.todoRoutes);
