@@ -12,7 +12,8 @@
     "stack:up": "docker-compose up -d",
     "stack:down": "docker-compose down",
     "stack:start": "docker-compose start",
-    "stack:stop": "docker-compose stop"
+    "stack:stop": "docker-compose stop",
+    "sequelize:init": "sequelize init"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -27,6 +28,7 @@
     "sequelize": "^6.31.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "sequelize-cli": "^6.6.0"
   }
 }
